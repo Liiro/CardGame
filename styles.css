@@ -1,0 +1,288 @@
+/* Base body styling */
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  background-image: url("./Assets/image.png"); /* Background image for the body */
+  background-position: center; /* Center the background image */
+  background-repeat: repeat; /* Repeat the background image */
+  background-size: contain; /* Ensure the background image fits within the container */
+  justify-content: center; /* Center content vertically */
+}
+
+/* Game container styling */
+#game-container {
+  position: relative;
+  width: 90%; /* Takes up 90% of the screen width */
+  max-width: 1000px; /* Ensures the width doesn't exceed 1000px */
+  margin: 20px auto; /* Centers the container horizontally */
+  border-radius: 12px; /* Rounded corners for the container */
+  padding: 20px; /* Padding inside the container */
+  height: fit-content; /* Height adjusts to fit content */
+}
+
+/* Row for cards */
+.cards-row {
+  display: flex;
+  justify-content: center; /* Centers the cards horizontally */
+  flex-wrap: wrap; /* Allows cards to wrap onto the next line if needed */
+  margin-bottom: 20px; /* Adds space between rows of cards */
+  gap: 20px; /* Adds space between individual cards */
+}
+
+/* Cards styling */
+.card {
+  width: 120px; /* Width of each card */
+  height: 160px; /* Height of each card */
+  margin: 10px; /* Spacing between cards */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px; /* Rounded corners for cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect for cards */
+  cursor: pointer; /* Pointer cursor on hover */
+  position: relative;
+}
+
+/* Hover effect on card */
+.card:hover {
+  transform: scale(1.05); /* Slightly enlarge the card on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+/* Special styling for the start card when it's the player's turn */
+.start-card-player {
+  background-image: url("./Assets/startPlayer.png") !important; /* Override background image */
+}
+
+/* Special styling for the end card when it's the player's turn */
+.end-card-player {
+  background-image: url("./Assets/goal_player.png") !important; /* Override background image */
+}
+
+/* Styling for the start card */
+.card.start-card {
+  background-image: url("./Assets/Start.png"); /* Background image for the start card */
+  color: white; /* Text color */
+  width: 100px; /* Width of the start card */
+  height: 140px; /* Height of the start card */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Font size for the text */
+  cursor: default; /* Default cursor (non-clickable) */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Do not repeat the background image */
+  background-size: cover; /* Ensure the background image covers the card */
+  border: 3px solid yellow !important; /* Yellow border for emphasis */
+  opacity: 1 !important; /* Ensure full opacity */
+}
+
+/* Styling for the end card */
+.card.end-card {
+  color: white; /* Text color */
+  width: 100px; /* Width of the end card */
+  height: 140px; /* Height of the end card */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* Font size for the text */
+  cursor: default; /* Default cursor (non-clickable) */
+  background-image: url("./Assets/Goal.png"); /* Background image for the end card */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Do not repeat the background image */
+  background-size: cover; /* Ensure the background image covers the card */
+  opacity: 1 !important; /* Ensure full opacity */
+  border-radius: 10px; /* Rounded corners for the end card */
+
+  /* Glass effect */
+  backdrop-filter: blur(8px); /* Adds blur effect */
+  background-color: rgba(0, 255, 0, 0.3); /* Adds a greenish tint */
+
+  /* Initial shadow effect (with glow) */
+  box-shadow: 0 -4px 6px rgba(0, 255, 0, 0.5),
+    /* Top shadow */ 4px 0 6px rgba(0, 255, 0, 0.5),
+    /* Right shadow */ -4px 0 6px rgba(0, 255, 0, 0.5),
+    /* Left shadow */ 0 4px 6px rgba(0, 255, 0, 0.5); /* Bottom shadow */
+
+  /* Apply the glowing animation */
+  animation: glow 1.5s ease-in-out infinite alternate; /* Glowing animation */
+}
+
+/* Keyframes for glowing effect */
+@keyframes glow {
+  0% {
+    box-shadow: 0 -4px 6px rgba(0, 255, 0, 0.5), 4px 0 6px rgba(0, 255, 0, 0.5),
+      -4px 0 6px rgba(0, 255, 0, 0.5), 0 4px 6px rgba(0, 255, 0, 0.5);
+  }
+  100% {
+    box-shadow: 0 -4px 20px rgba(0, 255, 0, 1), 4px 0 20px rgba(0, 255, 0, 1),
+      -4px 0 20px rgba(0, 255, 0, 1), 0 4px 20px rgba(0, 255, 0, 1); /* Increased glow intensity */
+  }
+}
+
+/* Card inner content styling */
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d; /* Preserve 3D transformations */
+  transition: transform 0.6s; /* Smooth transition for flipping */
+}
+
+/* Flip the card when revealed */
+.card.revealed .card-inner {
+  transform: rotateY(180deg); /* Rotate the card to reveal the back */
+}
+
+/* Ensure revealed cards are fully visible */
+.revealed {
+  opacity: 1 !important;
+}
+
+/* Front and back of the card */
+.card-front,
+.card-back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden; /* Hide the back face when flipped */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-image: url("./Assets/Card_Back.png"); /* Default card back image */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Do not repeat the background image */
+  background-size: cover; /* Ensure the background image covers the card */
+}
+
+/* Back of the card is rotated 180 degrees initially */
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Styling for images inside cards */
+.card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover; /* Ensure the image covers the space */
+}
+
+/* Styling for text inside cards */
+.card p {
+  margin: 5px 0; /* Spacing around the text */
+}
+
+/* Styling for inactive cards */
+.card.inactive {
+  opacity: 0.5; /* Reduce opacity for inactive cards */
+  cursor: not-allowed; /* Indicate that the card is not clickable */
+}
+
+/* Styling for the dialog backdrop */
+::backdrop {
+  background-color: rgb(0, 0, 0, 80%); /* Semi-transparent black backdrop */
+}
+
+/* Styling for the dialog box */
+dialog {
+  background-image: url("./Assets/image.png"); /* Background image for the dialog */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Do not repeat the background image */
+  background-size: cover; /* Ensure the background image covers the dialog */
+  justify-content: center;
+  gap: 10px; /* Spacing between elements */
+  color: white; /* Text color */
+  border: 0; /* No border */
+  border-radius: 10px; /* Rounded corners for the dialog */
+}
+
+/* Styling for the form inside the dialog */
+dialog form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Stack form elements vertically */
+}
+
+/* Styling for buttons inside the dialog */
+dialog form button {
+  display: block;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 8px;
+  width: 80%;
+  max-width: 200px;
+  border-radius: 8px; /* Rounded corners for the button */
+  color: #fff; /* Text color */
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: all 0.3s ease-out; /* Smooth transition for hover effects */
+  background: #1e348e; /* Fallback color for old browsers */
+  background: rgba(30, 52, 142, 0.5); /* Semi-transparent background */
+  border: 1px solid #fff; /* White border */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Hover and focus effects for buttons */
+dialog form button:hover,
+dialog form button:focus,
+dialog form button:active {
+  background: #fff; /* White background on hover */
+  color: #000; /* Black text on hover */
+  transition: all 0.5s ease-in; /* Smooth transition for hover effects */
+}
+
+/* Remove outline on focus for buttons */
+dialog form button:focus {
+  outline: none;
+}
+
+/* Styling for the win dialog */
+.winDialog {
+  /* Glass effect */
+  backdrop-filter: blur(8px); /* Adds blur effect */
+  background-color: rgba(0, 255, 0, 0.3); /* Adds a greenish tint */
+
+  /* Initial shadow effect (with glow) */
+  box-shadow: 0 -4px 6px rgba(0, 255, 0, 0.5),
+    /* Top shadow */ 4px 0 6px rgba(0, 255, 0, 0.5),
+    /* Right shadow */ -4px 0 6px rgba(0, 255, 0, 0.5),
+    /* Left shadow */ 0 4px 6px rgba(0, 255, 0, 0.5); /* Bottom shadow */
+
+  /* Apply the glowing animation */
+  animation: glow 1.5s ease-in-out infinite alternate; /* Glowing animation */
+}
+
+/* Styling for the lose dialog */
+.loseDialog {
+  /* Glass effect */
+  backdrop-filter: blur(8px); /* Adds blur effect */
+  background-color: rgba(255, 0, 0, 0.3); /* Adds a reddish tint */
+
+  /* Initial shadow effect (with glow) */
+  box-shadow: 0 -4px 6px rgba(255, 0, 0, 0.5),
+    /* Top shadow */ 4px 0 6px rgba(255, 0, 0, 0.5),
+    /* Right shadow */ -4px 0 6px rgba(255, 0, 0, 0.5),
+    /* Left shadow */ 0 4px 6px rgba(255, 0, 0, 0.5); /* Bottom shadow */
+
+  /* Apply the glowing animation */
+  animation: glowRed 1.5s ease-in-out infinite alternate; /* Glowing animation */
+}
+
+/* Keyframes for red glowing effect */
+@keyframes glowRed {
+  0% {
+    box-shadow: 0 -4px 6px rgba(255, 0, 0, 0.5), 4px 0 6px rgba(255, 0, 0, 0.5),
+      -4px 0 6px rgba(255, 0, 0, 0.5), 0 4px 6px rgba(255, 0, 0, 0.5);
+  }
+  100% {
+    box-shadow: 0 -4px 20px rgba(255, 0, 0, 1), 4px 0 20px rgba(255, 0, 0, 1),
+      -4px 0 20px rgba(255, 0, 0, 1), 0 4px 20px rgba(255, 0, 0, 1); /* Increased glow intensity */
+  }
+}
