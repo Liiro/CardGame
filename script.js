@@ -15,7 +15,7 @@ const allCards = [
   {
     name: "ladder",
     image: "./Assets/ladder.png",
-    imagePlayer: "./Assets/ladderPlayer.png",
+    imagePlayer: "./Assets/ladderplayer.png",
     start: true,
     to: ["gap", "bridge"],
   },
@@ -43,13 +43,13 @@ const allCards = [
   {
     name: "gap",
     image: "./Assets/gap.png",
-    imagePlayer: "./Assets/gap.png",
+    imagePlayer: "./Assets/Broken_Road.png",
     from: ["ladder", "portal2"],
     lose: true,
   },
   {
     name: "portal2",
-    image: "./Assets/portal2.png",
+    image: "./Assets/Portal2.png",
     imagePlayer: "./Assets/portal2Player.png",
     from: ["bridge", "portal1"],
     to: ["cliff", "gap"],
